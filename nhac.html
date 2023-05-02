@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nhac cua tui </title>
+</head>
+<style>
+    body{
+    background: linear-gradient(rgba(3, 3, 3, 0.1), rgba(0, 0, 0, 0.4)), url('/img/ảnh\ background\ nhạc.jpeg') no-repeat center /cover fixed;
+
+    }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .title {
+        text-align: center;
+    }
+
+    .songs-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .song {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        padding: 10px;
+    }
+
+    .song-image {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+
+    .song-details {
+        flex: 1;
+    }
+
+    .song-title {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    .song-artist {
+        margin-top: 5px;
+        font-size: 18px;
+    }
+
+    .song-button {
+        font-size: 18px;
+        padding: 10px;
+        background-color: #2196F3;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .song-button:hover {
+        background-color: #0D47A1;
+    }
+
+    .song-image.playing {
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    p{
+        text-decoration: none;
+        color: #fff;
+        font-size: 24px;
+        border: 1px solid #f7f3f3;
+        margin: 24px 359px ;
+
+    }
+</style>
+
+<body>
+    <div class="container">
+        <h1 class="title">my music</h1>
+        <a href="http://127.0.0.1:5500/index.html">
+            <p>quay lại</p>
+        </a>
+        <ul class="songs-list">
+            <li class="song">
+                <img class="song-image" src="/img/nền quay nhạc.jpg" alt="Song Image">
+                <div class="song-details">
+                    <h2 class="song-title">Song Title 1</h2>
+                    <h3 class="song-artist">kimochi</h3>
+                    <audio class="song-player">
+                        <source src="/audio/nhac1.mp3" type="audio/mpeg">
+                    </audio>
+                    <button class="song-button">Play</button>
+                </div>
+            </li>
+            <li class="song">
+                <img class="song-image" src="/img/nền quay nhạc.jpg" alt="Song Image">
+                <div class="song-details">
+                    <h2 class="song-title">Song Title 2</h2>
+                    <h3 class="song-artist">arimochiarimochi</h3>
+                    <audio class="song-player">
+                        <source src="/audio/nhac2.mp3" type="audio/mpeg">
+                    </audio>
+                    <button class="song-button">Play</button>
+                </div>
+            </li>
+
+            <li class="song">
+                <img class="song-image" src="/img/nền quay nhạc.jpg" alt="Song Image">
+                <div class="song-details">
+                    <h2 class="song-title">Song Title 3</h2>
+                    <h3 class="song-artist">kinomoto</h3>
+                    <audio class="song-player">
+                        <source src="/audio/nhac3.mp3" type="audio/mpeg">
+                    </audio>
+                    <button class="song-button">Play</button>
+                </div>
+            </li>
+
+            <li class="song">
+                <img class="song-image" src="/img/nền quay nhạc.jpg" alt="Song Image">
+                <div class="song-details">
+                    <h2 class="song-title">Song Title 4</h2>
+                    <h3 class="song-artist">arimoto</h3>
+                    <audio class="song-player">
+                        <source src="/audio/nhac4.mp3" type="audio/mpeg">
+                    </audio>
+                    <button class="song-button">Play</button>
+                </div>
+            </li>
+
+            <li class="song">
+                <img class="song-image" src="/img/nền quay nhạc.jpg" alt="Song Image">
+                <div class="song-details">
+                    <h2 class="song-title">Song Title 5</h2>
+                    <h3 class="song-artist">moe moe </h3>
+                    <audio class="song-player">
+                        <source src="/audio/video5.mp3" type="audio/mpeg">
+                    </audio>
+                    <button class="song-button">Play</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const songs = document.querySelectorAll('.song');
+
+        songs.forEach(song => {
+            const button = song.querySelector('.song-button');
+            const player = song.querySelector('.song-player');
+            const image = song.querySelector('.song-image');
+
+            button.addEventListener('click', () => {
+                if (player.paused || player.ended) {
+                    songs.forEach(song => {
+                        const button = song.querySelector('.song-button');
+                        const player = song.querySelector('.song-player');
+                        const image = song.querySelector('.song-image');
+                        player.pause();
+                        button.classList.remove('playing');
+                        image.classList.remove('playing');
+                    });
+                    player.play();
+                    button.classList.add('playing');
+                    image.classList.add('playing');
+                } else {
+                    player.pause();
+                    button.classList.remove('playing');
+                    image.classList.remove('playing');
+                }
+            });
+
+            player.addEventListener('ended', () => {
+                button.classList.remove('playing');
+                image.classList.remove('playing');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+    background: linear-gradient(rgba(3, 3, 3, 0.1), rgba(0, 0, 0, 0.4)), url('/img/ảnh\ nền\ của\ video\ 3.webp') no-repeat center /cover fixed;
+        
+    }
+    #playButton,
+    #pauseButton,
+    #fastForwardButton,
+    #rewindButton,
+    #muteButton,
+    #subtitlesButton,
+    #qualityButton {
+        padding: 10px;
+        background-color: #0c0d0d;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    a  {
+        text-decoration: none;
+        color: #fff;
+        font-size: 24px;
+    }
+   
+</style>
+
+<body>
+    <p align="center">
+    <video width="500px" height="500px" controls id="myVideo" src="/video/video3.mp4"></video>
+    </p>
+    <p align="center">
+        <button id="playButton">Play</button>
+        <button id="pauseButton">Pause</button>
+        <button id="fastForwardButton">Fast Forward</button>
+        <button id="rewindButton">Rewind</button>
+        <button id="muteButton">Mute</button>
+
+    </p>
+    <a href="http://127.0.0.1:5500/index.html"><p class="button">quay lại</p></a>
+
+    
+
+
+    <script>
+        const video = document.getElementById("myVideo");
+        const playButton = document.getElementById("playButton");
+        const pauseButton = document.getElementById("pauseButton");
+        const fastForwardButton = document.getElementById("fastForwardButton");
+        const rewindButton = document.getElementById("rewindButton");
+        const muteButton = document.getElementById("muteButton");
+        const subtitlesButton = document.getElementById("subtitlesButton");
+        const qualityButton = document.getElementById("qualityButton");
+
+        playButton.addEventListener("click", () => {
+            video.play();
+        });
+
+        pauseButton.addEventListener("click", () => {
+            video.pause();
+        });
+
+        fastForwardButton.addEventListener("click", () => {
+            video.currentTime += 5;
+        });
+
+        rewindButton.addEventListener("click", () => {
+            video.currentTime -= 5;
+        });
+
+        muteButton.addEventListener("click", () => {
+            video.muted = !video.muted;
+            updateMuteButton();
+        });
+
+        subtitlesButton.addEventListener("click", () => {
+            video.textTracks[0].mode = (video.textTracks[0].mode === "showing") ? "hidden" : "showing";
+            updateSubtitlesButton();
+        });
+
+        qualityButton.addEventListener("click", () => {
+            // insert code to change video quality here
+        });
+
+        function updateMuteButton() {
+            if (video.muted) {
+                muteButton.innerHTML = "Unmute";
+            } else {
+                muteButton.innerHTML = "Mute";
+            }
+        }
+
+        function updateSubtitlesButton() {
+            if (video.textTracks[0].mode === "showing") {
+                subtitlesButton.innerHTML = "Hide Subtitles";
+            } else {
+                subtitlesButton.innerHTML = "Show Subtitles";
+            }
+        }
+    </script>
+</body>
+
+</html>
